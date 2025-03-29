@@ -32,8 +32,7 @@ public class SecurityConfig {
                     .requestMatchers(
                             "/user/create",
                             "/user/login",
-                            "/cards/**",
-                            "deck/create").permitAll()
+                            "/cards/**").permitAll()
                     .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
