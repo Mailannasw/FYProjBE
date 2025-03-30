@@ -38,6 +38,7 @@ public class SecurityConfig {
                     .requestMatchers(
                             "/user/create",
                             "/user/login",
+                            "/card/**",
                             "/cards/**",
                             "/definition/**").permitAll()
                     .anyRequest().authenticated()
