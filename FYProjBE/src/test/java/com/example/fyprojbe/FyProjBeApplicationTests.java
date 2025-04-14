@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class FyProjBeApplicationTests {
 
+	// Test if the application loads successfully
 	@Test
 	void contextLoads() {
 	}

@@ -1,7 +1,6 @@
 package com.example.fyprojbe.model;
 
 import com.example.fyprojbe.model.types.DeckType;
-import io.magicthegathering.javasdk.resource.Card;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
+// Deck object
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,5 +22,7 @@ public class Deck {
     private String createdBy;
     private DeckType deckType;
     private String deckName;
-    private List<Card> cards;
+    private List<ScryfallCard> cards;
+    private ScryfallCard commander;
+    private int sizeLimit;
 }

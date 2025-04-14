@@ -57,11 +57,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>io.magicthegathering</groupId>
-			<artifactId>javasdk</artifactId>
-			<version>0.0.18</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>

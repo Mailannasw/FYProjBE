@@ -1,39 +1,33 @@
 package com.example.fyprojbe.controller;
 
+import com.example.fyprojbe.model.ScryfallCard;
 import com.example.fyprojbe.service.CardService;
-import io.magicthegathering.javasdk.api.CardAPI;
-import io.magicthegathering.javasdk.resource.Card;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
+// Controller for handling card-related requests
 @RestController
 public class CardController {
 
-    @Autowired
-    private CardService cardService;
+    private final CardService cardService;
 
-    // Get specific card by ID
-    @GetMapping("/card/{cardId}")
-    public Card getCard(@PathVariable String cardId) {
-        return CardAPI.getCard(cardId);
+    public CardController(CardService cardService) {
+        this.cardService = cardService;
     }
 
-    // Get all cards, paginated
-    @GetMapping("/cards")
-    public List<Card> getCards(@RequestParam(defaultValue = "1") int pageNumber,
-                               @RequestParam(defaultValue = "10") int pageSize) {
-        return cardService.getCards(pageNumber, pageSize);
-    }
-
-    // Get cards by name, exact or partial
+    // Get cards by name from Scryfall API, exact or partial matches (supported by Scryfall)
     @GetMapping("/cards/search")
-    public List<Card> getCardsByName(@RequestParam String cardName) {
-        return cardService.searchCardsByName(cardName);
+    public ScryfallCard getCardsByName(@RequestParam String cardName) {
+        System.out.println("Searching for card: " + cardName);
+        try {
+            ScryfallCard card = cardService.searchCardByNameScryfall(cardName);
+            System.out.println("Card found: " + card.getName());
+            return card;
+        } catch (ResponseStatusException e) {
+            System.out.println("Card not found: " + e.getStatusCode() + " - " + e.getReason());
+            throw e;
+        }
     }
-
 }
